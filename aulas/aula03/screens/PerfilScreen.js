@@ -5,8 +5,8 @@ function PerfilScreen() {
        <View style={styles.perfilSection}>
           <View style={styles.photo}></View>
           <View style={styles.perfilData}>
-            <Text>Jose Reginaldo</Text>
-            <Text>Desenvolvedor Senior</Text>
+            <Text>Daniel Amorim</Text>
+            <Text>Desenvolvedor Júnior / Publicitário</Text>
           </View>
        </View>
        <View>
