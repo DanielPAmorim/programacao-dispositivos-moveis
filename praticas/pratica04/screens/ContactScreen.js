@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import {View,Text,Image,ScrollView,StyleSheet,TouchableOpacity,} from "react-native";
 
 const contatos = [
   {
