@@ -1,32 +1,32 @@
 import { useState } from "react";
 import { View } from "react-native";
 import { TextInput, Button, HelperText } from "react-native-paper";
+import * as Yup from "yup"
 
 function RedefinirSenha() {
+  const schema = Yup.object().shape({
+    email: Yup.string().required("E-mail é obrigatório").email("E-mail é inválido")
+  });
   const [email, setEmail] = useState("");
   const [erro, setErro] = useState("");
 
-  const validaEmail = () => {
-    if (!email) {
-      setErro("E-mail é obrigatorio");
+  const validaEmail = async () => {
+    try{
+      await schema.validate({ email })
+      return true;
+    } catch(err) {
+      setErro(err.errors);
       return false;
     }
-
-    if (!email.includes("@")) {
-      setErro("E-mail inválido");
-      return false;
-    }
-
-    return true;
   };
 
-  const trataTexto = (texto) => {
+  const trataTexto = async (texto) => {
     setEmail(texto);
-    validaEmail();
+    await validaEmail();
   }
 
-  const trataEnviar = () => {
-    if (!validaEmail()) {
+  const trataEnviar = async () => {
+    if (!await validaEmail()) {
       return;
     }
     setEmail("");

@@ -1,20 +1,28 @@
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import { TextInput, HelperText, Button } from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
+import * as Yup from "yup";
+import {yupResolver} from "@hookform/resolvers/yup";
 
 function CriarConta() {
+  const schema = Yup.object().shape({
+    nome: Yup.string().required("Nome é obrigatório."),
+    email: Yup.string().required("E-mail é obrigatório.").email("E-mail inválido."),
+    senha: Yup.string().required("Senha é obrigatória.").min(8, "Deve conter no mínimo 8 caracteres.").max(16, "Deve conter no máximo 16 caracteres."),
+    confirmaSenha: Yup.string().oneOf([Yup.ref("senha"), null], "Senhas distintas, devem ser iguais.").required("Confirme a senha"),
+  })
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(schema) });
 
   return (
+    <ScrollView>
     <View style={{ flex: 1, padding: 16 }}>
       <Controller
         control={control}
         name="nome"
-        rules={{ required: "Nome é obrigatório" }}
         render={({ field: { value, onChange, onBlur } }) => (
           <TextInput
             label="Nome"
@@ -33,7 +41,6 @@ function CriarConta() {
       <Controller
         control={control}
         name="email"
-        rules={{ required: "E-mail é obrigatorio" }}
         render={({ field: { value, onChange } }) => (
           <TextInput
             label="E-mail"
@@ -52,7 +59,6 @@ function CriarConta() {
       <Controller
         control={control}
         name="senha"
-        rules={{ required: "Senha é obrigatorio" }}
         render={({ field: { value, onChange } }) => (
           <TextInput
             label="Senha"
@@ -70,14 +76,13 @@ function CriarConta() {
       <Controller
         control={control}
         name="confirmaSenha"
-        rules={{ required: "Confirma senha é obrigatorio" }}
         render={({ field: { value, onChange } }) => (
           <TextInput
             label="Confirma senha"
             mode="outlined"
             secureTextEntry
             value={value}
-            onChange={onChange}
+            onChangeText={onChange}
             error={errors.confirmaSenha}
           />
         )}
@@ -89,6 +94,7 @@ function CriarConta() {
         Criar
       </Button>
     </View>
+    </ScrollView>
   );
 }
 
