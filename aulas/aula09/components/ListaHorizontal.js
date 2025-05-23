@@ -1,17 +1,12 @@
+import { useContext } from "react";
 import { View, FlatList } from "react-native";
 import { Button, Text } from "react-native-paper";
 
-const categorias = [
-  "Restaurantes",
-  "Lanchonetes",
-  "Bares",
-  "Pizzarias",
-  "Mercados",
-  "Soverterias",
-  "Cafeterias",
-];
+import { LojaContext } from "../contexts/LojaContext";
 
 function ListaHorizontal() {
+  const { categorias } = useContext(LojaContext);
+
   return (
     <View style={{ marginBottom: 8 }}>
       <Text variant="titleMedium" style={{ marginBottom: 8 }}>
@@ -24,8 +19,8 @@ function ListaHorizontal() {
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => (
           <View style={{ flex: 1, marginRight: 8 }}>
-            <Button mode="outlined" onPress={() => {}}>
-              {item}
+            <Button mode="outlined" icon={item.icone} onPress={() => {}}>
+              {item.nome}
             </Button>
           </View>
         )}
