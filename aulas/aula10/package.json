@@ -1,0 +1,16 @@
+{
+  "name": "aula10",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx json-server db.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "json-server": "^1.0.0-beta.3"
+  }
+}

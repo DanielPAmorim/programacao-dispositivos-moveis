@@ -1,0 +1,19 @@
+{
+  "tarefas": [
+    {
+      "id": "3c4d",
+      "nome": "Rezar para P2",
+      "concluida": false
+    },
+    {
+      "id": "20f4",
+      "nome": "Rezar para P2",
+      "concluida": false
+    },
+    {
+      "id": "1e22",
+      "nome": "Estudar React Native",
+      "concluida": false
+    }
+  ]
+}
